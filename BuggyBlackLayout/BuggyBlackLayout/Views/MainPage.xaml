@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mediaManager="clr-namespace:Plugin.MediaManager.Forms;assembly=Plugin.MediaManager.Forms"
+             x:Class="BuggyBlackLayout.Views.MainPage">
+
+
+  <ContentPage.Resources>
+    <Style x:Key="GridStyle" TargetType="Grid">
+      <Setter Property="BackgroundColor" Value="White" />
+      <Setter Property="Margin" Value="0,5" />
+      <Setter Property="Padding" Value="10" />
+    </Style>
+
+    <Style x:Key="ListViewStyle" TargetType="ListView">
+      <Setter Property="BackgroundColor" Value="Transparent" />
+      <Setter Property="HasUnevenRows" Value="true" />
+      <Setter Property="SeparatorVisibility" Value="None" />
+    </Style>
+
+    <Style x:Key="MediaManagerStyle" TargetType="mediaManager:VideoView">
+      <Setter Property="AspectMode" Value="AspectFill" />
+      <Setter Property="HeightRequest" Value="380" />
+      <Setter Property="Margin" Value="-10,0" />
+      <Setter Property="VerticalOptions" Value="FillAndExpand" />
+    </Style>
+  </ContentPage.Resources>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <ListView ItemsSource="{Binding VideoUrls}" Style="{StaticResource ListViewStyle}">
+      <x:Arguments>
+        <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+      </x:Arguments>
+
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <Grid Style="{StaticResource GridStyle}">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+              </Grid.RowDefinitions>
+
+              <mediaManager:VideoView Grid.Row="0" Style="{StaticResource MediaManagerStyle}" />
+            </Grid>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </Grid>
+</ContentPage>
